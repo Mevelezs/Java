@@ -13,6 +13,8 @@ public class Main {
     myDoc.addAvailableAppointment (new Date (), "4: pm");
     myDoc.addAvailableAppointment (new Date (), "14: pm");
     myDoc.addAvailableAppointment (new Date (), "18: pm");
+    System.out.println ("\n");
+    myDoc.ShowDataUser ();
 
 
     System.out.println (myDoc);

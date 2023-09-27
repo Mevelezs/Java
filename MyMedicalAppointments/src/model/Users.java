@@ -46,8 +46,9 @@ public abstract class Users {
     return "+57 " + phoneNumber;
   }
 
+  public abstract void ShowDataUser ();
   @Override
   public String toString () {
-    return "User: " + name + "\n" + "Email: " + email + "\n";
+    return "Name: " + name + "\n" + "Email: " + email + "\n";
   }
 }
