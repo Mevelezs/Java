@@ -1,5 +1,7 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +11,6 @@ public class Doctor extends Users {
 
   public Doctor ( String name, String email, String speciality ) {
     super(name, email);
-    System.out.println ("This is the model.Doctor with your dates \n");
     this.speciality = speciality;
   }
 
@@ -26,9 +27,18 @@ public class Doctor extends Users {
     private int id;
     private Date date;
     private String time;
+    /**
+     * @Name: SimpleDateFormat
+     * @Description:  método para dar formato y pasar de date a string y alrevés
+     */
+    SimpleDateFormat format = new SimpleDateFormat ("dd/MM/yyyy");
 
-    public AvailableAppointment(Date date, String time ){
-      this.date = date;
+    public AvailableAppointment(String date, String time ){
+      try {
+        this.date = format.parse ( date ); // parcear un sting a date;
+      } catch ( ParseException e ) {
+        throw new RuntimeException ( e );
+      }
       this.time = time;
     }
 
@@ -38,6 +48,15 @@ public class Doctor extends Users {
 
     public Date getDate () {
       return date;
+    }
+
+    /**
+     * @Description: metodo sobreescrito para oasar de date a string
+     * @param DATE : parametro util solo para la sobreescritura
+     * @return : formatea la fecha(tipo Date) y la convierte en string
+     */
+    public String getDate (String DATE) {
+      return format.format ( date );
     }
 
     public void setTime ( String time ) {
@@ -72,7 +91,7 @@ public class Doctor extends Users {
    * @param date : parameter of Date type fot the array
    * @param time : parameter of type string for the array
    */
-  public void addAvailableAppointment(Date date, String time){
+  public void addAvailableAppointment(String date, String time){
     availableAppointments.add( new AvailableAppointment ( date, time ));
   }
 

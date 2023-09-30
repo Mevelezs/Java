@@ -9,7 +9,6 @@ public class Patient extends Users {
 
   public Patient ( String name, String email ) {
     super (name, email );
-    System.out.println ("This is the model.Patient \n");
   }
 
   public void setHeight ( double height ) {

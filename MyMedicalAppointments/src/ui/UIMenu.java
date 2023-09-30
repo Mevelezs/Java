@@ -16,7 +16,7 @@ public class UIMenu {
 
     public static void showMenu(){
       System.out.println ("Welcome to My Appointments");
-      System.out.println ("Selecciona la operación deseada");
+      System.out.println ("Selecciona la opción deseada");
 
       int response;
       do {
@@ -29,17 +29,11 @@ public class UIMenu {
 
         switch ( response ){
           case 1:
-            System.out.println (" ");
-            System.out.println ("*********************************");
-            System.out.println ("The Doctor's Dates");
-            System.out.println ("*********************************");
             response = 0;
             authUser ( 1 );
             break;
           case 2:
-            System.out.println ("*********************************");
-            System.out.println ("The Patient Dates");
-            System.out.println ("*********************************");
+
             response = 0;
             authUser ( 2 );
             break;
@@ -56,41 +50,6 @@ public class UIMenu {
 
   }
 
-  private static void showNameDoctor () {
-      int option;
-    do {
-      System.out.println ("Select an option");
-
-      System.out.println ("1 : Book an appointment");
-      System.out.println ("2 : My appointments");
-      System.out.println ("0 : Return");
-
-      Scanner sc = new Scanner ( System.in );
-      option = sc.nextInt ();
-      switch ( option ){
-        case 1:
-          System.out.println (" ");
-          System.out.println ("*********************************");
-          System.out.println (":: Book an appointment");
-          System.out.println ("*********************************");
-          for ( int i = 0; i < 3; i++ ){
-            System.out.println (i+1 + "." + MONTHS[i]);
-          }
-          System.out.println ("\n\n");
-          break;
-        case 2:
-          System.out.println (" ");
-          System.out.println ("*********************************");
-          System.out.println ("this are your appointments");
-          System.out.println ("*********************************");
-          break;
-        case 0:
-          showMenu ();
-          break;
-      }
-    }while(option != 0);
-
-  }
   public static void authUser(int userType){
     ArrayList < Doctor > doctors = new ArrayList<> ();
     doctors.add ( new Doctor ( "Mauricio", "mevelezs@mail.com", "General" ));
@@ -119,6 +78,7 @@ public class UIMenu {
           if ( d.getEmail ().equals ( email ) ) {
             emailCorrect = true;
             doctorLogged = d;
+            UIDoctorMenu.showDoctorMenu ();
           }
         }
       }
