@@ -9,48 +9,55 @@ public class AppointmentDoctor implements ISchedulable {
   private Date date;
   private String time;
 
-  public int getId () {
-    return id;
-  }
-
-  public void setId ( int id ) {
-    this.id = id;
-  }
-
-  public Patient getPatient () {
-    return patient;
-  }
-
-  public void setPatient ( Patient patient ) {
+  public AppointmentDoctor(Patient patient, Doctor doctor) {
     this.patient = patient;
-  }
-
-  public Doctor getDoctor () {
-    return doctor;
-  }
-
-  public void setDoctor ( Doctor doctor ) {
     this.doctor = doctor;
   }
 
-  public Date getDate () {
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public Patient getPatient() {
+    return patient;
+  }
+
+  public void setPatient(Patient patient) {
+    this.patient = patient;
+  }
+
+  public Doctor getDoctor() {
+    return doctor;
+  }
+
+  public void setDoctor(Doctor doctor) {
+    this.doctor = doctor;
+  }
+
+  public Date getDate() {
     return date;
   }
 
-  public void setDate ( Date date ) {
+  public void setDate(Date date) {
     this.date = date;
   }
 
-  public String getTime () {
-    return time;
+  public String getTime() {
+    return time + " hrs.";
   }
 
-  public void setTime ( String time ) {
+  public void setTime(String time) {
     this.time = time;
   }
 
   @Override
-  public void schedulable ( Date date, String time ) {
-
+  public void schedulable(Date date, String time) {
+    this.date = date;
+    this.time = time;
   }
+
 }

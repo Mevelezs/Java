@@ -7,11 +7,10 @@ import java.util.Date;
 
 public class Doctor extends Users {
   private String speciality;
+  private   ArrayList<AvailableAppointment> availableAppointments = new ArrayList<> ();
 
-
-  public Doctor ( String name, String email, String speciality ) {
+  public Doctor ( String name, String email) {
     super(name, email);
-    this.speciality = speciality;
   }
 
 
@@ -46,16 +45,15 @@ public class Doctor extends Users {
       this.date = date;
     }
 
-    public Date getDate () {
+    public Date getDate (String DATE) {
       return date;
     }
 
     /**
-     * @Description: metodo sobreescrito para oasar de date a string
-     * @param DATE : parametro util solo para la sobreescritura
+     * @Description: metodo sobreescrito para pasar de date a string
      * @return : formatea la fecha(tipo Date) y la convierte en string
      */
-    public String getDate (String DATE) {
+    public String getDate () {
       return format.format ( date );
     }
 
@@ -84,7 +82,7 @@ public class Doctor extends Users {
   /**
    * This us the form to create ArrayLists
    */
-  ArrayList<AvailableAppointment> availableAppointments = new ArrayList<> ();
+
 
   /**
    * Description : This method add news elements for array

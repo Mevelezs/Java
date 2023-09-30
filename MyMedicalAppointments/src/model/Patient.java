@@ -1,56 +1,86 @@
 package model;
 
-public class Patient extends Users {
+import java.util.ArrayList;
+import java.util.Date;
 
+public class Patient extends Users {
+  //Atributos
   private String birthday;
   private double weight;
   private double height;
   private String blood;
 
-  public Patient ( String name, String email ) {
-    super (name, email );
+  private ArrayList<AppointmentDoctor> appointmentDoctors = new ArrayList<>();
+  private ArrayList<AppointmentNurse> appointmentNurses = new ArrayList<>();
+
+  public ArrayList<AppointmentDoctor> getAppointmentDoctors() {
+    return appointmentDoctors;
   }
 
-  public void setHeight ( double height ) {
-    this.height = height;
+  public void addAppointmentDoctors(Doctor doctor, Date date, String time) {
+    AppointmentDoctor appointmentDoctor = new AppointmentDoctor(this, doctor);
+    appointmentDoctor.schedulable(date,time);
+    appointmentDoctors.add(appointmentDoctor);
   }
 
-  public double getHeight () {
-    return height;
+  public ArrayList<AppointmentNurse> getAppointmentNurses() {
+    return appointmentNurses;
   }
 
-  public void setBirthday ( String birthday ) {
-    this.birthday = birthday;
+  public void setAppointmentNurses(ArrayList<AppointmentNurse> appointmentNurses) {
+    this.appointmentNurses = appointmentNurses;
   }
 
-  public String getBirthday () {
-    return birthday;
+  public Patient(String name, String email){
+    super(name,email);
+    //mas instrucciones
   }
 
-  public void setWeight ( double weight ) {
+  // 54.5
+  public void setWeight(double weight) {
     this.weight = weight;
   }
 
-  public String getWeight () {
-    return weight + " Kg.";
+  // 54.5 Kg. String
+  public String getWeight(){
+    return this.weight + " Kg.";
   }
 
-  public void setBlood ( String blood ) {
-    this.blood = blood;
+
+  public String getHeight() {
+    return height + " Mts.";
   }
 
-  public String getBlood () {
+  public void setHeight(double height) {
+    this.height = height;
+  }
+
+  public String getBirthday() {
+    return birthday;
+  }
+
+  public void setBirthday(String birthday) {
+    this.birthday = birthday;
+  }
+
+  public String getBlood() {
     return blood;
   }
 
-  @Override
-  public String toString () {
-    return super.toString () + "Age: " + birthday+ "\n" + "Weight: " + getWeight ();
+  public void setBlood(String blood) {
+    this.blood = blood;
   }
 
   @Override
-  public void ShowDataUser () {
-    System.out.println ("Pasiente");
-    System.out.println ("Historial completo desde nacimiento");
+  public String toString() {
+    return super.toString() + "\nAge: " + birthday + "\n Weight: " +getWeight()+ "\n Height"+getHeight()+"\nBlood"+blood;
   }
+
+  @Override
+  public void ShowDataUser() {
+    System.out.println("Paciente");
+    System.out.println("Historial completo desde naciemiento");
+
+  }
+
 }
