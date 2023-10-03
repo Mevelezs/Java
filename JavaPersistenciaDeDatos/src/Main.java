@@ -27,7 +27,7 @@ public class Main {
           MessageServices.deleteMessage ();
           break;
         case 4:
-          MessageServices.updateMessage (  );
+          MessageServices.updateMessage ();
           break;
         default:
           break;
