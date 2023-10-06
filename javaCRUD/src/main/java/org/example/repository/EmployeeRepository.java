@@ -13,6 +13,7 @@ public class EmployeeRepository implements Repository < Employee > {
   private static Connection getConnection () throws SQLException {
     return ConnectionDB.getConnectionDB ();
   }
+
   @Override
   public List< Employee > findAll () throws SQLException {
     List < Employee > employees = new ArrayList<> ();
@@ -47,9 +48,9 @@ public class EmployeeRepository implements Repository < Employee > {
   public void save ( Employee employee, int id ) throws SQLException {
     String query;
     if(id > 0){
-      query = "UPDATE employees SET first_name=?, pa_surname=?, ma_surname=?, email=?, salary=? WHERE id ="+id;
+      query = "UPDATE employees SET first_name=?, pa_surname=?, ma_surname=?, email=?, salary=?, curp=? WHERE id ="+id;
     }else{
-      query = "INSERT INTO employees ( first_name, pa_surname, ma_surname, email, salary) VALUES (?, ?, ?, ?, ?)";
+      query = "INSERT INTO employees ( first_name, pa_surname, ma_surname, email, salary, curp) VALUES (?, ?, ?, ?, ?, ?)";
     }
     try (PreparedStatement ps = getConnection ().prepareStatement ( query )){
       ps.setString ( 1, employee.getFirst_name () );
@@ -57,6 +58,7 @@ public class EmployeeRepository implements Repository < Employee > {
       ps.setString ( 3, employee.getMa_surname () );
       ps.setString ( 4, employee.getEmail () );
       ps.setFloat ( 5,  employee.getSalary () );
+      ps.setString (6, employee.getCurp ()  );
       ps.executeUpdate ();
 
       if(id > 0){
@@ -85,6 +87,7 @@ public class EmployeeRepository implements Repository < Employee > {
     e.setMa_surname ( rs.getString ( "ma_surname" ));
     e.setEmail ( rs.getString ( "email" ) );
     e.setSalary ( rs.getFloat ( "salary" ));
+    e.setCurp ( rs.getString ( "curp" ) );
     return e;
   }
 }

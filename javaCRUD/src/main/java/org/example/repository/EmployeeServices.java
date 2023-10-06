@@ -74,8 +74,10 @@ public class EmployeeServices {
     String email = sc.nextLine ();
     System.out.println ( ":: Write Employee Salary :" );
     Float salary = Float.valueOf ( sc.nextLine () );
+    System.out.println ( ":: Write Employee Curp :" );
+    String curp = sc.nextLine ();
 
-    Employee newEmployee = new Employee ( name, first_surname, second_surname, email, salary );
+    Employee newEmployee = new Employee ( name, first_surname, second_surname, email, salary, curp);
 
     Repository < Employee > repository = new EmployeeRepository ();
     repository.save ( newEmployee , id);
