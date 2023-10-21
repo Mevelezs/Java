@@ -9,6 +9,10 @@ server:
 ---
 spring:
   profiles: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/market
+    username: mauricio
+    password: admin123
 server:
   port: 8090
 
@@ -17,4 +21,3 @@ spring:
   profiles: prod
 server:
   port: 80
-
