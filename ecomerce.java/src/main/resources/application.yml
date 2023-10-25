@@ -21,3 +21,11 @@ spring:
   profiles: prod
 server:
   port: 80
+---
+swagger:
+  api-info:
+    title: API de Ejemplo
+    description: Documentación de la API de Ejemplo
+    version: 1.0
+  base-package: com/ecomerce/java/web/controller
+   # http://localhost:8090/api/swagger-ui/index.html -- direccion de la doc

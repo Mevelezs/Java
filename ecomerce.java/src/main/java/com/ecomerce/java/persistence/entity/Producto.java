@@ -7,21 +7,21 @@ import javax.persistence.*;
 public class Producto {
   @Id
   @GeneratedValue ( strategy = GenerationType.IDENTITY )
-  @Column ( name = "id_product" )
-  private Integer idProduct;
+  @Column ( name = "id_producto" )
+  private Integer idProducto;
 
-  private String name;
+  private String nombre;
+
   @Column ( name = "id_categoria")
-
   private Integer idCategoria;
-  @Column ( name = "codigo_barra" )
 
+  @Column ( name = "codigo_barras" )
   private String codigoBarra;
-  @Column ( name = "procio_venta" )
 
+  @Column ( name = "precio_venta" )
   private Double precioVenta;
-  @Column ( name = "cantidad_stock" )
 
+  @Column ( name = "cantidad_stock" )
   private Integer cantidadStock;
   private Boolean estado;
 
@@ -29,21 +29,20 @@ public class Producto {
   @JoinColumn ( name = "id_categoria", insertable = false, updatable = false)
   private Categoria categoria;
 
-
-  public Integer getIdProduct () {
-    return idProduct;
+  public Integer getIdProducto () {
+    return idProducto;
   }
 
-  public void setIdProduct ( Integer idProduct ) {
-    this.idProduct = idProduct;
+  public void setIdProducto ( Integer idProducto ) {
+    this.idProducto = idProducto;
   }
 
-  public String getName () {
-    return name;
+  public String getNombre () {
+    return nombre;
   }
 
-  public void setName ( String name ) {
-    this.name = name;
+  public void setNombre ( String nombre ) {
+    this.nombre = nombre;
   }
 
   public Integer getIdCategoria () {
@@ -84,5 +83,13 @@ public class Producto {
 
   public void setEstado ( Boolean estado ) {
     this.estado = estado;
+  }
+
+  public Categoria getCategoria () {
+    return categoria;
+  }
+
+  public void setCategoria ( Categoria categoria ) {
+    this.categoria = categoria;
   }
 }

@@ -9,7 +9,7 @@ public class ComprasProducto {
   @EmbeddedId
   private ComprasProductoPK id;
 
-  private Integer cantidac;
+  private Integer cantidad;
   private Double total;
   private Boolean estado;
 
@@ -18,6 +18,7 @@ public class ComprasProducto {
   private Producto producto;
 
   @ManyToOne
+  @MapsId ("id")
   @JoinColumn ( name = "id_compra", insertable = false, updatable = false )
   private Compra compra;
 
@@ -29,12 +30,12 @@ public class ComprasProducto {
     this.id = id;
   }
 
-  public Integer getCantidac () {
-    return cantidac;
+  public Integer getCantidad () {
+    return cantidad;
   }
 
-  public void setCantidac ( Integer cantidac ) {
-    this.cantidac = cantidac;
+  public void setCantidad ( Integer cantidad ) {
+    this.cantidad = cantidad;
   }
 
   public Double getTotal () {
@@ -52,4 +53,22 @@ public class ComprasProducto {
   public void setEstado ( Boolean estado ) {
     this.estado = estado;
   }
+
+  public Producto getProducto () {
+    return producto;
+  }
+
+  public void setProducto ( Producto producto ) {
+    this.producto = producto;
+  }
+
+  public Compra getCompra () {
+    return compra;
+  }
+
+  public void setCompra ( Compra compra ) {
+    this.compra = compra;
+  }
+
+
 }
