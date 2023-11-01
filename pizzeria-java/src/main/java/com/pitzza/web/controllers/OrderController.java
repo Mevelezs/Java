@@ -1,6 +1,7 @@
 package com.pitzza.web.controllers;
 
 import com.pitzza.persistence.entity.OrderEntity;
+import com.pitzza.persistence.projection.OrderSummary;
 import com.pitzza.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,15 @@ public class OrderController {
     return ResponseEntity.ok(this.orderService.getOutsideOrders ());
   }
 
+  @GetMapping ("/customer/{idCustomer}")
+  public ResponseEntity < List  <OrderEntity > > getCustomerOrders (@PathVariable String idCustomer ){
+    return ResponseEntity.ok(this.orderService.getCustomerOrders ( idCustomer ));
+  }
+
+  @GetMapping ("/summary/{idOrder}")
+  public ResponseEntity < OrderSummary > getSummary ( @PathVariable int idOrder) {
+    return ResponseEntity.ok (this.orderService.getSummary ( idOrder ));
+  }
 
   @PostMapping
   public ResponseEntity < OrderEntity > saveOrder ( @RequestBody OrderEntity order) {

@@ -3,6 +3,7 @@ package com.pitzza.web.controllers;
 
 import com.pitzza.persistence.entity.PizzaEntity;
 import com.pitzza.service.PizzaService;
+import com.pitzza.service.dto.UpdatePizzaPriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -77,6 +78,15 @@ public class PizzaController {
       return ResponseEntity.ok( this.pizzaService.save ( pizza ) );
     }
     return ResponseEntity.badRequest ().build ();
+  }
+
+  @PatchMapping ( "/price")
+  public  ResponseEntity < String > updatePrice ( @RequestBody UpdatePizzaPriceDTO dto){
+    if( this.pizzaService.exists ( dto.getPizzaId () )){
+      this.pizzaService.updatePrice ( dto );
+      return ResponseEntity.ok ("Price changed");
+    }
+    return ResponseEntity.notFound ().build ();
   }
 
   @DeleteMapping ( "/{id}")

@@ -1,6 +1,7 @@
 package com.pitzza.service;
 
 import com.pitzza.persistence.entity.OrderEntity;
+import com.pitzza.persistence.projection.OrderSummary;
 import com.pitzza.persistence.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,13 @@ public class OrderService {
     return this.orderRepository.findById ( idOrder ).orElse ( null );
   }
 
+  public List < OrderEntity > getCustomerOrders ( String idCustomer ){
+    return this.orderRepository.findCustomerOrders ( idCustomer );
+  }
+
+  public OrderSummary getSummary( int idOrder ){
+    return this.orderRepository.findSummary ( idOrder );
+  }
   public OrderEntity save ( OrderEntity orderEntity ) {
     return this.orderRepository.save ( orderEntity );
   }

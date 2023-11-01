@@ -5,12 +5,15 @@ import com.pitzza.persistence.entity.PizzaEntity;
 // import org.springframework.jdbc.core.JdbcTemplate;
 import com.pitzza.persistence.repository.PizzaPagSortRepository;
 import com.pitzza.persistence.repository.PizzaRepository;
+import com.pitzza.service.dto.UpdatePizzaPriceDTO;
+import com.pitzza.service.exception.EmailApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -83,6 +86,26 @@ public class PizzaService {
 
   public void delete ( int idPizza ){
     this.pizzaRepository.deleteById ( idPizza );
+  }
+
+  /**
+   * @Transactional : serializa las transacciones usando el protocolo ACID;
+                     y hace rollback si algo sale mal con la transaccion.
+                     si le ponemos el neRollbackFor se salta la validacion de esta transaccion y
+                     si hay una excepcion con esta no hace rollback, con el resto si lo hace
+   * @param dto : recibe el objeto con el id de la pizza y el nuevo precio
+   */
+  @Transactional ( noRollbackFor = EmailApiException.class)
+  public void updatePrice ( UpdatePizzaPriceDTO dto ){
+     this.pizzaRepository.updatePrice ( dto );
+     this.senEmail ();
+  }
+
+  /**
+   * Método para lanzar una transacción que genera una excepcion
+   */
+  private void senEmail (){
+    throw new EmailApiException ();
   }
 
 }

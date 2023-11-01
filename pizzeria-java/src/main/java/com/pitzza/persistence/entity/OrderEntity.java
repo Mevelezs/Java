@@ -42,5 +42,6 @@ public class OrderEntity {
   private CustomerEntity customer;
 
   @OneToMany(mappedBy = "order", fetch = FetchType.EAGER )
+  @OrderBy ("price DESC") // otra forma de ordenar directamente con hibernate
   private List<OrderItemEntity> items;
 }
