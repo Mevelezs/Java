@@ -3,6 +3,7 @@ package com.pitzza.web.controllers;
 import com.pitzza.persistence.entity.OrderEntity;
 import com.pitzza.persistence.projection.OrderSummary;
 import com.pitzza.service.OrderService;
+import com.pitzza.service.dto.RandomOrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -76,5 +77,10 @@ public class OrderController {
       return ResponseEntity.ok("Order Deleted");
     }
     return ResponseEntity.notFound ().build ();
+  }
+
+  @PostMapping ("/random")
+  public ResponseEntity < Boolean > randomOrder ( @RequestBody RandomOrderDTO dto ){
+   return  ResponseEntity.ok (this.orderService.saveRandomOrder ( dto ));
   }
 }

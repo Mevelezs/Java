@@ -3,8 +3,10 @@ package com.pitzza.service;
 import com.pitzza.persistence.entity.OrderEntity;
 import com.pitzza.persistence.projection.OrderSummary;
 import com.pitzza.persistence.repository.OrderRepository;
+import com.pitzza.service.dto.RandomOrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDate;
@@ -61,4 +63,10 @@ public class OrderService {
   public boolean exist ( int idOrder ) {
     return this.orderRepository.existsById ( idOrder );
   }
+
+  @Transactional
+  public  boolean saveRandomOrder ( RandomOrderDTO randomOrderDTO ){
+    return this.orderRepository.saveRandomOrder ( randomOrderDTO.getIdCustomer (), randomOrderDTO.getMethod ()  );
+  }
 }
+
