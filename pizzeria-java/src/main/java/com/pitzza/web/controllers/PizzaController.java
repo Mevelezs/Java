@@ -30,6 +30,7 @@ public class PizzaController {
   }
 
   @GetMapping ( "/available" )
+  @CrossOrigin (origins = "http://127.0.0.1:5500")
   public ResponseEntity< Page< PizzaEntity > > getAvailable (
           @RequestParam (defaultValue = "0") int page,
           @RequestParam (defaultValue = "8") int elements,
