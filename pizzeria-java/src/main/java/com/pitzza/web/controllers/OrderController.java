@@ -79,6 +79,11 @@ public class OrderController {
     return ResponseEntity.notFound ().build ();
   }
 
+  /**
+   *
+   * @param dto : en la peticion hay que enviar el josn en el body {idCustomer: valor entero, methd : valor} tal cual como está, sacando el idCustomer de la db
+   * @return
+   */
   @PostMapping ("/random")
   public ResponseEntity < Boolean > randomOrder ( @RequestBody RandomOrderDTO dto ){
    return  ResponseEntity.ok (this.orderService.saveRandomOrder ( dto ));
