@@ -3,7 +3,10 @@ package com.pitzza.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
@@ -15,6 +18,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+// toma las anotaciones de seguridad que estań incluso por fuera de los controladores y las hace efectivas
+@EnableMethodSecurity ( securedEnabled = true )
 public class SecurityConfig {
 
   @Bean
@@ -23,7 +28,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(( customizeRequests )  -> {
               customizeRequests
                       // en los matches No se agrega el server.servlet.context-path
-                      //.requestMatchers ( HttpMethod.GET, "/pizzas/**" ).permitAll ()
+                      .requestMatchers ( "/auth/login" ).permitAll ()
                       .requestMatchers ( HttpMethod.GET, "/pizzas/**" ).hasAnyRole ( "ADMIN", "CUSTOMER" )
                       .requestMatchers (HttpMethod.POST ,"/orders/random" ).hasAuthority ( "random_order" ) // no es necesario el post (pero clarifica lo que se hace)
                       .requestMatchers ("/orders/**" ).hasRole ( "ADMIN" )
@@ -58,5 +63,10 @@ public class SecurityConfig {
   @Bean
   public PasswordEncoder passwordEncoder (){
     return new BCryptPasswordEncoder ();
+  }
+
+  @Bean
+  public AuthenticationManager authenticationManager ( AuthenticationConfiguration configuration ) throws Exception {
+    return configuration.getAuthenticationManager ();
   }
 }

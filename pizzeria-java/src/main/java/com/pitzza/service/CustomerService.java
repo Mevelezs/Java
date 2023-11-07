@@ -3,6 +3,7 @@ package com.pitzza.service;
 import com.pitzza.persistence.entity.CustomerEntity;
 import com.pitzza.persistence.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class CustomerService {
     this.customerRepository = customerRepository;
   }
 
+  @Secured( {"ROLE_ADMIN"} ) // asegura que solo el admin pueda accede a esta ruta
   public List < CustomerEntity > getAllCustomers (){
     return this.customerRepository.findAllCustomers ();
   }
