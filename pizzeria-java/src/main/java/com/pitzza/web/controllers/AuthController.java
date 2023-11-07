@@ -37,6 +37,7 @@ public class AuthController {
     System.out.println ( authentication.getPrincipal () );
 
     String jwt = this.jwtUtil.create ( loginDTO.getUsername () );
+    System.out.println ( "===> Token creado sin validar " + jwt);
 
     return ResponseEntity.ok().header( HttpHeaders.AUTHORIZATION, jwt ).build ();
   }

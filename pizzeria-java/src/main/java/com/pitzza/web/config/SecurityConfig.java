@@ -9,18 +9,25 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+// import org.springframework.security.core.userdetails.User;
+// import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+// import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 // toma las anotaciones de seguridad que estań incluso por fuera de los controladores y las hace efectivas
 @EnableMethodSecurity ( securedEnabled = true )
 public class SecurityConfig {
+  private final JwtFilter jwtFilter;
+
+  public SecurityConfig ( JwtFilter jwtFilter ) {
+    this.jwtFilter = jwtFilter;
+  }
 
   @Bean
   public SecurityFilterChain filterChain ( HttpSecurity http ) throws Exception {
@@ -29,6 +36,7 @@ public class SecurityConfig {
               customizeRequests
                       // en los matches No se agrega el server.servlet.context-path
                       .requestMatchers ( "/auth/login" ).permitAll ()
+                      .requestMatchers ( "/customer/phone"  ).hasRole ( "CUSTOMER" )
                       .requestMatchers ( HttpMethod.GET, "/pizzas/**" ).hasAnyRole ( "ADMIN", "CUSTOMER" )
                       .requestMatchers (HttpMethod.POST ,"/orders/random" ).hasAuthority ( "random_order" ) // no es necesario el post (pero clarifica lo que se hace)
                       .requestMatchers ("/orders/**" ).hasRole ( "ADMIN" )
@@ -37,14 +45,16 @@ public class SecurityConfig {
                       .authenticated();
             }
         )
+        .sessionManagement( session -> session.sessionCreationPolicy ( SessionCreationPolicy.STATELESS ) )
         .csrf( AbstractHttpConfigurer::disable)
         .cors(Customizer.withDefaults())
-        .httpBasic( Customizer.withDefaults ());
+        // .httpBasic( Customizer.withDefaults ());
+        .addFilterBefore ( jwtFilter , UsernamePasswordAuthenticationFilter.class  );
     return http.build();
   }
 
-  /*
-  // Usuarios hordcodeados
+  /**
+  // Usuarios hordcodeados ( autenticacion en memoria )
   @Bean
   public UserDetailsService memoryUser (){
     UserDetails admin = User.builder ()
