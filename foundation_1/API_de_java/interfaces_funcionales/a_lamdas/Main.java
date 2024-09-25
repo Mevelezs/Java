@@ -1,4 +1,4 @@
-package API_de_java.interfaces_funcionales;
+package API_de_java.interfaces_funcionales.a_lamdas;
 
 import java.time.LocalDateTime;
 
