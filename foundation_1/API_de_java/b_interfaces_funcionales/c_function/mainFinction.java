@@ -1,4 +1,4 @@
-package API_de_java.interfaces_funcionales.c_function;
+package API_de_java.b_interfaces_funcionales.c_function;
 
 import java.util.function.Function;
 

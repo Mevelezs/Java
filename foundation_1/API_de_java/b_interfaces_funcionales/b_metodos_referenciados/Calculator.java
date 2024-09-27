@@ -1,4 +1,4 @@
-package API_de_java.interfaces_funcionales.b_metodos_referenciados;
+package API_de_java.b_interfaces_funcionales.b_metodos_referenciados;
 
 @FunctionalInterface
 public interface Calculator {
