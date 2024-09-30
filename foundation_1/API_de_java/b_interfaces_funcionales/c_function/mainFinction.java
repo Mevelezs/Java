@@ -7,7 +7,7 @@ public class mainFinction {
 	/**
 	 *
 	 * Interfaz Function -> Interfaz genérica que acepta un argumento de tipo T y produce un resultado de tipo R -> Es
-	 * util para trabajar en operaciones de transformación den flujos (streams) y colecciones. -> tiene un único método
+	 * util para trabajar en operaciones de transformación en flujos (streams) y colecciones. -> tiene un único método
 	 * apply() que es el que retorna el resultado.
 	 */
 	public static void main(String[] args){
