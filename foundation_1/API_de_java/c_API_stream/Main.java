@@ -1,9 +1,8 @@
 package API_de_java.c_API_stream;
 
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -103,5 +102,71 @@ public class Main {
 				.toList();
 
 		System.out.println(minors);
+
+		// Encontrar el numero de palabras únicas en una oración
+		System.out.println("---------------------- Example 4 --------------------------");
+
+		String text = "Ejemplo ejemplo texto texto texto";
+
+		Set< String > wordsUnique = Arrays.stream(text.split("\\s+"))
+				.map(String::toLowerCase)
+				.collect(Collectors.toSet());
+
+		System.out.println( wordsUnique+" : " +wordsUnique.size());
+
+   // ordenar las palabras de una cadena de texto en orden alfabetico
+		System.out.println("\nPalabras ordenadas alfabeticamente");
+
+		String text2 = "Ejemplo de ordenamiento utilizando el API stream de Java";
+
+		Arrays.stream(text2.split("\\s+"))
+				.sorted(String.CASE_INSENSITIVE_ORDER)
+				.forEach(System.out::println);
+
+		// ordenar las palabras de un string por cantidad de caracteres de menos a mas
+		System.out.println("\nPalabras ordenadas por cantidad de caracteres");
+
+		String text3 = "El ordenamientos de los eventos historicos es el más importante";
+
+		List<String> orderedReverseWords = Arrays.stream(text3.split("\\s+"))
+				.map(String::toLowerCase)
+				.sorted(Comparator.comparingInt(String::length).reversed())
+				.distinct()
+				.toList();
+
+		System.out.println(orderedReverseWords);
+
+		// Ordenar una cadena de caracterres segun las veces que aparece ala letra "a"
+		System.out.println("\nPalabras ordenadas por cantidad de veces que aparece al 'a'");
+
+		String text4 = "La distancia rrecorrida a pie desde la cascada";
+
+		Comparator <String> comparatorByAmountA = (world1, word2) -> {
+       int amountAWorld1 = ( int ) world1.chars().filter(letter -> letter == 'a' || letter == 'A').count();
+			 int amountAWorld2 = ( int ) word2.chars().filter(letter -> letter == 'a' || letter == 'A').count();
+			 return Integer.compare(amountAWorld1, amountAWorld2);
+		};
+
+		List<String> orderedByAmountA = Arrays.stream(text4.split("\\s+"))
+				.map(String::toLowerCase)
+				.filter(world -> world.contains("a"))
+				.distinct()
+				.sorted(comparatorByAmountA)
+				.toList();
+
+		System.out.println(orderedByAmountA);
+
+		//Usando metodo referenciado de una clase externa
+		System.out.println("\nLista de trabajadores");
+		List<String> names2 =  Arrays.asList("Muricio", "Vélez", "Solís");
+
+		Comparator<Worker> comparatorByAge = Comparator.comparing(Worker::getAge); // Comparador con método referenciado
+
+		List<Worker> nameWorker = names2.stream()
+				.map(Worker :: new)// referncia el constructor de Workers
+				.sorted(comparatorByAge)
+				.toList();
+
+		System.out.println(nameWorker);
 	}
 }

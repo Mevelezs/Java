@@ -6,7 +6,7 @@ public class mainFinction {
 
 	/**
 	 *
-	 * Interfaz Function -> Interfaz genérica que acepta un argumento de tipo T y produce un resultado de tipo R -> Es
+	 * Interfaz Function -> Interfaz genérica que acepta un argumento de tipo T y produce un resultado de tipo R (transforma un tipo de dato en otro) -> Es
 	 * util para trabajar en operaciones de transformación en flujos (streams) y colecciones. -> tiene un único método
 	 * apply() que es el que retorna el resultado.
 	 */
@@ -17,5 +17,6 @@ public class mainFinction {
 
 		Function<Integer, Double> cuadrado = x ->  Math.pow(x, x);
 		System.out.println(cuadrado.apply(3));
+
 	}
 }
