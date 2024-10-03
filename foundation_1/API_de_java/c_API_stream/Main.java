@@ -14,26 +14,27 @@ public class Main {
 	 *
 	 * @Operaciones Intermedias -> Son las que transforman un stream en otro stream. Estas operaciones son peresozas, lo
 	 * que significa que no e ejecuta hasta que se invoca una operación terminal en el stream.
-	 *   filter(Predicate<T> predicate) -> filtra elementos en función de una condición dada por el predicado
-	 *   map(Function <T, R> mapper) -> Transforma los elementos del stream aplicando la función dada a cada elemento.
-	 *   flatMap(Function <T, Stream<R> > mapper) -> Aplana un stream de colecciones aplicando la función dad a cada
+	 *   @filter(Predicate<T> predicate) -> filtra elementos en función de una condición dada por el predicado
+	 *   @map(Function <T, R> mapper) -> Transforma los elementos del stream aplicando la función dada a cada elemento.
+	 *   @flatMap(Function <T, Stream<R> > mapper) -> Aplana un stream de colecciones aplicando la función dad a cada
 	 *     elemnto y devolviendo un stream de elementos individuales.
-	 *   distinct() -> Elimina elementos duplicados del stream.
-	 *   sorted() -> Ordena según su orden natural.
-	 *   sorted (Comparator<T> comparator) -> ordena seún el comparador.
-	 *   takeWhile(Predicate<T> predicate) y dropWhile(Predicate<T> predicate) -> Toma y/o descarta elementos en base a
+	 *   @distinct() -> Elimina elementos duplicados del stream.
+	 *   @sorted() -> Ordena según su orden natural.
+	 *   @sorted (Comparator<T> comparator) -> ordena seún el comparador.
+	 *   @takeWhile(Predicate<T> predicate) y dropWhile(Predicate<T> predicate) -> Toma y/o descarta elementos en base a
 	 *     una condición, similar a un bucle while.
 
 	 * @Operaciones Terminales -> Son aquellas que producen un resultado a partir del stream
-	 *  forEach(Consumer<T> action) -> Realiza una acción dada en cada elemento.
-	 *  toArray() -> Convierte el steam en un array.
-	 *  reduce(BinaryOperator<T> accumulator) -> Combina elemntos del stream en un único valor utilizando un acumulador.
-	 *  collect(Collecto<T, A, R> collector) -> Transforma y/o acumula elementos del stream en una colección o un
-	 *     objeto utilizando un collector.
-	 *  min(Comparator<T> comparator) y max(Comparator<T> comparator) -> Devueleve el minimo o maximo elemnto del
+	 *  @forEach(Consumer<T> action) -> Realiza una acción dada en cada elemento.
+	 *  @toArray() -> Convierte el steam en un array.
+	 *  @reduce(BinaryOperator<T> accumulator) -> Combina elemntos del stream en un único valor utilizando un acumulador.
+	 *  @collect(Collector< ? super T, A, R> collector) -> Transforma y/o acumula elementos del stream en una colección
+	 *     o un objeto utilizando un collector (T -> Tipo de elemento del stream (? super -> cualquier super clase de T),
+	 *     A -> el tipo del acumulador interno, R -> tipo de resultado de la operación de colección).
+	 *  @min(Comparator<T> comparator) y max(Comparator<T> comparator) -> Devueleve el minimo o maximo elemnto del
 	 *     stream, segúnel comparador proporcionado.
-	 *  count() -> Cuenta los elementos del stream.
-	 *  anyMatch(Predicate<T> predicate), allMatch(Predicate<T> predicate) y noneMatch(Predicate<T> predicate) ->
+	 *  @count() -> Cuenta los elementos del stream.
+	 *  @anyMatch(Predicate<T> predicate), allMatch(Predicate<T> predicate) y noneMatch(Predicate<T> predicate) ->
 	 *     Evalua si algún, todos o ninguno de los elementos del stream cumple con la condición dada por el predicado.
 	 */
 	public static void main(String[] args){
@@ -158,7 +159,7 @@ public class Main {
 
 		//Usando metodo referenciado de una clase externa
 		System.out.println("\nLista de trabajadores");
-		List<String> names2 =  Arrays.asList("Muricio", "Vélez", "Solís");
+		List<String> names2 =  Arrays.asList("Mauricio", "Vélez", "Solís");
 
 		Comparator<Worker> comparatorByAge = Comparator.comparing(Worker::getAge); // Comparador con método referenciado
 
@@ -168,5 +169,17 @@ public class Main {
 				.toList();
 
 		System.out.println(nameWorker);
+
+		// Usando streams para operaciones en paralelo (para cuando hay multiples hilos en el procesador)
+
+		List<String> names3 = Arrays.asList("Luis", "Pedro", "Juan", "Carlos", "Felipe", "Lia", "Ana");
+
+		List<String> filterNames = names3.parallelStream()
+				.filter(n -> n.length() > 3)
+				.map(String::toUpperCase)
+				.sorted()
+				.toList();
+
+		System.out.println(filterNames);
 	}
 }
