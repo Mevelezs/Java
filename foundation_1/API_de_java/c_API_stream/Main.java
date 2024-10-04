@@ -31,6 +31,16 @@ public class Main {
 	 *  @collect(Collector< ? super T, A, R> collector) -> Transforma y/o acumula elementos del stream en una colección
 	 *     o un objeto utilizando un collector (T -> Tipo de elemento del stream (? super -> cualquier super clase de T),
 	 *     A -> el tipo del acumulador interno, R -> tipo de resultado de la operación de colección).
+	 *     Algunos metodos avanzados de Collect usando Collectors incluyen:
+	 *        @toMap(Function<T, K> keyMapper, Function<T, U> valueMapper, BinaryOperator<U> mergeFunction, Supplier<M>
+	 *          mapFactory) -> recolecta los lementos del stream en un mapa -> keyMapper es una función para generar
+	 *          claves -> valueMapper para generar valores  a partir de cada elemento -> mergeFunction toma los
+	 *          valores de tipo U y devuelve un unico valor combinado de tipo U (se utiliza en caso que haya valores
+	 *          distintos asociadoa a la misma clave en el Map) -> mapFactory no toma argumento pero devuelve un objeto
+	 *          de tipo M (subtipo de Map<K, U>) y se usa para crear instancias de la estructura de datos esultante (Map).
+	 *        @groupingBy(Function<T, K> classifier, Collector<T, A, D> DownStream) -> Recolecta los datos del stream
+	 *        en um Mapa, donde las claves son el resultado de aplicar la función classifier a los elementos de stream
+	 *        y los valores son el resultado de aplicar otro colector a los elemntos agrupados.
 	 *  @min(Comparator<T> comparator) y max(Comparator<T> comparator) -> Devueleve el minimo o maximo elemnto del
 	 *     stream, segúnel comparador proporcionado.
 	 *  @count() -> Cuenta los elementos del stream.
@@ -181,5 +191,20 @@ public class Main {
 				.toList();
 
 		System.out.println(filterNames);
+
+
+		// Ordenar las palabras de un string segun la cantidad de veces que aparece cada palabra de mayor a menor
+		String lorem = """
+				Lorem ipsum dolor sit amet consectetur adipisicing Vitae iusto laboriosam cum sint, maxime aliquid consequuntur temporibus perferendis consectetur molestiae qui quo officia optio, numquam impedit, cupiditate minus ab alias Lorem ipsum dolor sit amet  adipisicing elit. Vitae iusto laboriosam cum sint, maxime aliquid consequuntur temporibus perferendis consectetur molestiae qui quo officia optio, numquam impedit, cupiditate minus ab alias Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae iusto laboriosam cum sint, maxime aliquid consequuntur consectetur molestiae qui quo officia optio, numquam impedit, cupiditate minus ab alias
+				""";
+
+		Map<String, Long> sortedMapWorld = Arrays.stream(lorem.split("\\s+"))// convierte el texto en un array de palabras
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))// colecciona>agrupa
+				.entrySet().stream()//concierte el stream en un flujo pares clave valor
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))// ordena y voltea
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new ));
+		//colecciona en un mapa> clave, valor, funcion de combinación> guardamos en un mapa que respete el orden
+
+		System.out.println(sortedMapWorld);
 	}
 }
