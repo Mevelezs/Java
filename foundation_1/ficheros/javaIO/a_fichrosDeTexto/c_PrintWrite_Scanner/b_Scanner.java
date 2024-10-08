@@ -1,4 +1,4 @@
-package ficheros.javaIO.c_PrintWrite_Scanner;
+package ficheros.javaIO.a_fichrosDeTexto.c_PrintWrite_Scanner;
 
 import java.io.File;
 import java.io.FileNotFoundException;

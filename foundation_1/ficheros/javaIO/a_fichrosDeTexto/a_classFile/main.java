@@ -1,4 +1,4 @@
-package ficheros.javaIO.a_classFile;
+package ficheros.javaIO.a_fichrosDeTexto.a_classFile;
 
 import java.io.File;
 import java.io.IOException;
