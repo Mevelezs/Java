@@ -45,7 +45,7 @@ public class a_fileWriter {
 
 	public static void main(String[] args){
      String text = "\nThis is an example about to use of FileWriter in Java";
-		 String file = "/home/mevelezs/Downloads/ensayoJava/archivo.txt";
+		 String file = "/home/mevelezs/Downloads/ensayoJava/archivo.txt"; // si el archivo no existe lo crea
 
 		 try{
 			 FileWriter fileWriter = new FileWriter(file, true); // append para que no machaque el contenido (true)
