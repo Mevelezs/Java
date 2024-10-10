@@ -1,9 +1,9 @@
-package ficheros.javaIO.a_fichrosDeTexto.d_Buffereds;
+package ficheros.javaIO.a_ficherosDeTexto.d_Buffereds;
 
 import java.io.*;
 import java.util.Arrays;
 
-public class a_bufferedReader {
+public class ReaderAndWriter {
 
 	/**
 	 *Los buffers como los files son untilizados para leer y escribir en ficheros pero estos utilizan un buffer

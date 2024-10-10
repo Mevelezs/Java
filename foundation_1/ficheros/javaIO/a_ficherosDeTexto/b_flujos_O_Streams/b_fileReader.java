@@ -1,4 +1,4 @@
-package ficheros.javaIO.a_fichrosDeTexto.b_flujos_O_Streams;
+package ficheros.javaIO.a_ficherosDeTexto.b_flujos_O_Streams;
 
 import java.io.FileReader;
 import java.io.IOException;
