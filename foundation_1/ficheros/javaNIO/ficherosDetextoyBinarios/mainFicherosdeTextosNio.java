@@ -1,4 +1,4 @@
-package ficheros.javaNIO.a_ficherosDetexto;
+package ficheros.javaNIO.ficherosDetextoyBinarios;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
