@@ -1,7 +1,6 @@
 package ficheros.javaIO.serializacion;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class mainSerializacion {
 
