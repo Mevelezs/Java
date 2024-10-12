@@ -1,5 +1,8 @@
 package ficheros.javaIO.serializacion;
 
+import java.io.*;
+import java.util.Arrays;
+
 public class mainSerializacion {
 
 	/**
@@ -24,5 +27,32 @@ public class mainSerializacion {
 	 */
 	public static void main(String[] args){
 
+
+		Grupo dam = new Grupo("1DAM");
+		dam.agregarAlumnos(new Alumno("Mauricio", "1QWEZ3",39));
+		dam.agregarAlumnos(new Alumno("Esteban", "2DSER3", 23));
+
+		Grupo dam2 = null;
+
+		try{
+      // Escribiendo el estado en el fichero binario (Serializando)
+		  FileOutputStream fos = new FileOutputStream("/home/mevelezs/Downloads/ensayoJava/ensayoJava2/archivo.dat");
+		  ObjectOutputStream out = new ObjectOutputStream(fos);
+			out.writeObject(dam);
+
+			out.close();
+
+			//Deserializando
+			FileInputStream fis = new FileInputStream("/home/mevelezs/Downloads/ensayoJava/ensayoJava2/archivo.dat");
+			ObjectInputStream in = new ObjectInputStream(fis);
+
+			dam2 = (Grupo) in.readObject();
+			dam2.mostrarAlumnos();
+
+			in.close();
+
+		} catch ( IOException | ClassNotFoundException e ){
+			 e.printStackTrace();
+		}
 	}
 }
