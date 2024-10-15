@@ -13,8 +13,15 @@ public class mainconnetDB {
 
 		a_getOfDB.get();
 		System.out.println("---------------------------------");
-		c_updateOfDB.update("pepe@pepe.com", "pepe4");
+		b_postOfDB.insert( "Pepe_Grillo", "pepe@pepe.com");
 		a_getOfDB.get();
+		System.out.println("---------------------------------");
+		c_updateOfDB.update("pepe@pepe.com", "pepe2");
+		a_getOfDB.get();
+		System.out.println("---------------------------------");
+		d_deleteOfDB.delete("pepe@pepe.com");
+		a_getOfDB.get();
+
 
 
 

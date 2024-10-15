@@ -1,5 +1,6 @@
 package coneccioDBsinDepndencias;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,10 +9,10 @@ public class a_getOfDB {
 
 	public static void get(){
 		String query = "SELECT * FROM contacto";
+		Connection conn = connectionDB.connection();
 
-		try ( PreparedStatement queryGet = connectionDB.connection().prepareStatement(query) ){
-			System.out.println("Connection was successfully");
-
+		try ( PreparedStatement queryGet = conn.prepareStatement(query) ){
+			//System.out.println("Connection was successfully");
 			ResultSet result = queryGet.executeQuery();
 
 			while ( result.next() ){
@@ -19,7 +20,7 @@ public class a_getOfDB {
 				String email = result.getString("correo");
 				System.out.println("Name: " + name + " " + "Email: " + email);
 			}
-			connectionDB.connection().close();
+
 		} catch ( SQLException e ){
 			System.out.println(e);
 		}
