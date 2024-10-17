@@ -5,10 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class c_updateOfDB {
-	public static void update (String email, String updatedName){
+	public static void update (String dbName, String email, String updatedName){
+		Connection conn = connectionDB.connection(dbName);
 		String query = "UPDATE contacto SET nombre = ? WHERE correo = ?";
-
-		Connection conn = connectionDB.connection();
 
 		try ( PreparedStatement queryUpdate = conn.prepareStatement(query) ){
 			queryUpdate.setString(1, updatedName);

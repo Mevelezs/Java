@@ -11,17 +11,18 @@ public class mainconnetDB {
 
 	public static void main(String[] args){
 
-		a_getOfDB.get();
+		a_getOfDB.get("foundation");
 		System.out.println("---------------------------------");
-		b_postOfDB.insert( "Pepe_Grillo", "pepe@pepe.com");
-		a_getOfDB.get();
+		b_postOfDB.insert( "foundation","Pepe_Grillo", "pepe@pepe.com");
+		a_getOfDB.get("foundation");
 		System.out.println("---------------------------------");
-		c_updateOfDB.update("pepe@pepe.com", "pepe2");
-		a_getOfDB.get();
+		c_updateOfDB.update("foundation","pepe@pepe.com", "pepe2");
+		a_getOfDB.get("foundation");
 		System.out.println("---------------------------------");
-		d_deleteOfDB.delete("pepe@pepe.com");
-		a_getOfDB.get();
+		d_deleteOfDB.delete("foundation","pepe@pepe.com");
+		a_getOfDB.get("foundation");
 
+   // Guardando imagenes como binarios en la db
 
 
 
