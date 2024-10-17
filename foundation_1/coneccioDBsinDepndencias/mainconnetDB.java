@@ -1,5 +1,8 @@
 package coneccioDBsinDepndencias;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class mainconnetDB {
 	/**
 	 Para poder conectar la db sin dependencias se necesita
@@ -23,8 +26,14 @@ public class mainconnetDB {
 		a_getOfDB.get("foundation");
 
    // Guardando imagenes como binarios en la db
-
-
+		//b_postOfDB.insert("agenda", "Mauric", "mai@ma.co", 123454312, "/home/mevelezs/Downloads/foto_carnet.jpeg");
+		try{
+			d_getImageFromDB.getImage("agenda");
+		} catch ( SQLException e ){
+			System.out.println(e);
+		} catch ( IOException e ){
+			System.out.println(e);
+		}
 
 	}
 

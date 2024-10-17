@@ -32,7 +32,7 @@ public class b_postOfDB {
 
 		Connection conn = connectionDB.connection(dbName);
 
-		String query = "INSERT INTO contacto (nombre, correo) VALUES (?, ?, ?, ?)";
+		String query = "INSERT INTO contacto (nombre, correo, telefono, imagen) VALUES (?, ?, ?, ?)";
 
 		try {
 		// para insertar una imagen en la db primero hay que convertirla en un array de bites
