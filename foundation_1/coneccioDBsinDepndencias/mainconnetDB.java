@@ -2,6 +2,7 @@ package coneccioDBsinDepndencias;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class mainconnetDB {
 	/**
@@ -25,16 +26,23 @@ public class mainconnetDB {
 		d_deleteOfDB.delete("foundation","pepe@pepe.com");
 		a_getOfDB.get("foundation");
 
-   // Guardando imagenes como binarios en la db
-		//b_postOfDB.insert("agenda", "Mauric", "mai@ma.co", 123454312, "/home/mevelezs/Downloads/foto_carnet.jpeg");
+    // Guardando imagenes como binarios en la db
+		b_postOfDB.insert("agenda", "Mauric", "mai@ma.co", 123454312, "/home/mevelezs/Downloads/foto_carnet.jpeg");
+		
+		// obteniendo las imagenes de la db
 		try{
-			d_getImageFromDB.getImage("agenda");
+			e_getImageFromDB.getImage("agenda");
 		} catch ( SQLException e ){
 			System.out.println(e);
 		} catch ( IOException e ){
 			System.out.println(e);
 		}
 
+      Scanner pwd = new Scanner(System.in);
+		System.out.println("Write your password: ");
+		f_encrypting.insertWithEncryptPassword("agenda2","Mauricio","mevelezs@gmail.coo.o", pwd.nextLine());
+
+		f_encrypting.getInfoUserWithCredentials("agenda2");
 	}
 
 }

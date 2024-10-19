@@ -1,11 +1,10 @@
 package coneccioDBsinDepndencias;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 
-public class d_getImageFromDB {
+public class e_getImageFromDB {
  public static void getImage (String dbName) throws SQLException, IOException{
 
 	 Connection conn = connectionDB.connection(dbName);
