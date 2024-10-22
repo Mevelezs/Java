@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class eventosJavaSwing {
+public class a_eventosJavaSwing_botones {
 
 	/**
 	 * > Para conectarnos a los eventos se usan interfaces, una de las mas usadas en ActionListener que tiene un único
