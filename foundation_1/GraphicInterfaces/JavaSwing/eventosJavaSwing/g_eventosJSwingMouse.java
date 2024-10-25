@@ -1,8 +1,13 @@
 package GraphicInterfaces.JavaSwing.eventosJavaSwing;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  @MouseListener -> Es la interfaz que se usa para recibir eventos del ratón (clicks, movimientod del ratón, arrastrat
@@ -23,8 +28,19 @@ import java.awt.event.MouseListener;
 public class g_eventosJSwingMouse {
 
 	public static void main(String[] args){
-		JLabel labelImage = new JLabel(new ImageIcon("/home/mevelezs/Pictures/car.jpg"));
-		labelImage.addMouseListener(new MouseListener() {
+		JFrame window = new JFrame();
+		BufferedImage image = null;
+
+		try{
+			image = ImageIO.read(new File("/home/mevelezs/Pictures/car.jpg"));
+		} catch ( IOException e ){
+			throw new RuntimeException(e);
+		}
+
+		Image scaledImage = image.getScaledInstance(image.getWidth()/2, image.getHeight()/2, Image.SCALE_SMOOTH);
+    JLabel label = new JLabel(new ImageIcon(scaledImage));
+
+		label.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e){
@@ -51,5 +67,10 @@ public class g_eventosJSwingMouse {
 				System.out.println("Has salido de la imagen");
 			}
 		});
+		window.setSize(image.getWidth()+2, image.getHeight()+2);
+		window.setLayout(new FlowLayout());
+		window.add(label);
+		window.setVisible(true);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
