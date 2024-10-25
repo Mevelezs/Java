@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  EL uso de imagenes en Java Swing se basa en la clase imageIcon -> Permite cargar imagenes en formato JPEG, PNG,
@@ -30,15 +31,21 @@ public class e_eventosJSwing_imagenes {
 
 	public static void main(String[] args){
 		JFrame window = new JFrame("Image window");
-		window.setSize(800, 400);
+		window.setSize(500, 500);
 
 		// Preparando contenedores de imagen
 		BufferedImage originalImageCar = null;
 		BufferedImage originalImageWarning = null;
+		BufferedImage originalImageURL = null;
+
+
 		try{
 			// creando buffer de imagen
 			originalImageCar = ImageIO.read(new File("/home/mevelezs/Pictures/car.jpg"));
 			originalImageWarning = ImageIO.read(new File("/home/mevelezs/Pictures/warning.jpg"));
+			originalImageURL = ImageIO.read(new URL("https://www.shutterstock" +
+					".com/shutterstock/photos/2506761705/display_1500/stock-vector-cow-logo-cow-farm-product-logo-design-vector-vintage-cattle-angus-beef-logo-2506761705.jpg"));
+
 
 		} catch ( IOException e ){
 			throw new RuntimeException(e);
@@ -46,14 +53,20 @@ public class e_eventosJSwing_imagenes {
 
 		// escalando imagen e intanciando elemento con imagen escalada
 		Image scaledImageCar= originalImageCar.getScaledInstance(40, 20, Image.SCALE_SMOOTH);
-		JLabel label = new JLabel(new ImageIcon(scaledImageCar));
+		JLabel label1 = new JLabel(new ImageIcon(scaledImageCar));
 
-		Image scaleImageWarning = originalImageWarning.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-    JButton button = new JButton("Click", new ImageIcon(scaleImageWarning));
+		Image scaledImageWarning = originalImageWarning.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+    JButton button = new JButton("Click", new ImageIcon(scaledImageWarning));
 		button.setFocusable(false); // quita el foco del boton
+		button.addActionListener(e -> System.out.println("Click button"));
+
+		Image scaledImageURL = originalImageURL.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+		JLabel label2 = new JLabel(new ImageIcon(scaledImageURL));
+
 
   	window.add(button);
-		window.add(label);
+		window.add(label1);
+		window.add(label2);
 		window.setLayout(new FlowLayout());
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
