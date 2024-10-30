@@ -38,7 +38,7 @@ public class h_eventosJSwing_paintComponent {
      window.setVisible(true);
 
      JFrame window2 = new JFrame("Repaint with clock");
-     repaintHourWithChangeSizeWindow panel = new repaintHourWithChangeSizeWindow();
+     repaintHour panel = new repaintHour();
      window2.add(panel);
 
      window2.setSize(400, 200);

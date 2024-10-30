@@ -5,7 +5,7 @@ import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class repaintHourWithChangeSizeWindow extends JPanel {
+public class repaintHour extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g){
