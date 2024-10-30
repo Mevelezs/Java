@@ -1,7 +1,6 @@
 package GraphicInterfaces.JavaSwing.eventosJavaSwing;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  El método pintComponent(Graphics g) se llama automaticamente pos Swing cuando cree que es necesario volver a dibujar
@@ -34,10 +33,16 @@ public class h_eventosJSwing_paintComponent {
 
      JFrame window = new JFrame("Figures");
      window.add(new paintingFigures());
-     window.setSize(800, 800);
-     window.setLayout(new FlowLayout());
+     window.setSize(400, 400);
      window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      window.setVisible(true);
+
+     JFrame window2 = new JFrame("Repaint with clock");
+     window2.add(new repaintHourWithChangeSizeWindow());
+
+     window2.setSize(400, 200);
+     window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     window2.setVisible(true);
 	}
 
 }

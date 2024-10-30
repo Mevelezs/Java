@@ -17,6 +17,7 @@ public class paintingFigures extends JPanel {
 		g.drawRect(50, 50, 200, 100);
 
 		//dibuja ovalo
+		g.setColor(Color.GREEN);
 		g.drawOval(200, 50, 150, 100);
 
 		Polygon triangle = new Polygon();
