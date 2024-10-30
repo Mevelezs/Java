@@ -18,7 +18,7 @@ public class repaintHour extends JPanel {
 
 		g.setFont(new Font("Arial", Font.BOLD, 18));
 		g.setColor(Color.BLUE);
-		g.drawString("Hello world the hour is "+textHour, 50, 50);
+		g.drawString("Hello world, the hour is "+textHour, 50, 50);
 
 	}
 
