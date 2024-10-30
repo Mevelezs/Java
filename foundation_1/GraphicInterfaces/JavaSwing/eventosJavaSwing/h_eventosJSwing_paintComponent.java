@@ -38,11 +38,15 @@ public class h_eventosJSwing_paintComponent {
      window.setVisible(true);
 
      JFrame window2 = new JFrame("Repaint with clock");
-     window2.add(new repaintHourWithChangeSizeWindow());
+     repaintHourWithChangeSizeWindow panel = new repaintHourWithChangeSizeWindow();
+     window2.add(panel);
 
      window2.setSize(400, 200);
      window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      window2.setVisible(true);
+
+    Timer clock = new Timer(1000, e -> panel.repaint());
+    clock.start();
 	}
 
 }
